@@ -29,8 +29,14 @@
 ## 📸 پیش‌نمایش
 
 | مشکی | آبی | سبز |
-|:---:|:---:|:---:|
-| ⬛ | 🟦 | 🟩 |
+<p align="center">
+  <img src="purple.png" width="220">
+  <img src="green.png" width="220">
+  <img src="lightpurple.png" width="220">
+     <img src="blue.png" width="220">
+     <img src="red.png" width="220">
+     <img src="yellow.png" width="220">
+</p>
 
 
 ---
