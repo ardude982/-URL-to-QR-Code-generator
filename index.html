@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>تبدیل متن به کیو آر کد</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+  <h2>تبدیل متن به کیو آر کد</h2>
+  <input type="text" id="url" placeholder="https://example.com" dir="ltr">
+
+  <div id="qrWrap">
+    <div id="qrBox"><div id="qrCanvas"></div></div>
+  </div>
+
+  <p class="label">انتخاب رنگ</p>
+  <div class="swatches" id="swatches">
+    <button class="swatch" style="background:linear-gradient(135deg,#6a5cff,#ff5ca8)" data-g1="#6a5cff" data-g2="#ff5ca8"></button>
+    <button class="swatch" style="background:linear-gradient(135deg,#3ea6ff,#7cc9ff)" data-g1="#3ea6ff" data-g2="#7cc9ff"></button>
+    <button class="swatch" style="background:linear-gradient(135deg,#b89bff,#ffb6e6)" data-g1="#b89bff" data-g2="#ffb6e6"></button>
+    <button class="swatch" style="background:linear-gradient(135deg,#4fd1c5,#9be89b)" data-g1="#4fd1c5" data-g2="#9be89b"></button>
+    <button class="swatch" style="background:linear-gradient(135deg,#ffb37a,#ff8fa3)" data-g1="#ffb37a" data-g2="#ff8fa3"></button>
+    <button class="swatch" style="background:linear-gradient(135deg,#ffc86a,#ff8f6a)" data-g1="#ffc86a" data-g2="#ff8f6a"></button>
+  </div>
+
+  <button id="gen">تولید کیو آر کد</button>
+  <div id="out"></div>
+</div>
+
+<script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+<script src="JScript.js"></script>
+</body>
+</html>

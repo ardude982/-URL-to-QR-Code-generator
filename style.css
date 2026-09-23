@@ -1,0 +1,106 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Vazirmatn", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  background: #f4f4f6;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: #fff;
+  max-width: 380px;
+  width: 100%;
+  margin: 20px;
+  padding: 28px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+h2 { font-weight: 600; font-size: 20px; margin: 0 0 20px; color: #1a1a1a; }
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid #d8d8dc;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  outline: none;
+}
+input[type="text"]:focus { border-color: #6c5ce7; }
+
+#qrWrap { display: flex; justify-content: center; margin-bottom: 12px; }
+#qrBox {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+#qrCanvas { width: 240px; height: 240px; }
+#qrCanvas canvas, #qrCanvas svg { border-radius: 8px; }
+
+.upload-row { margin-bottom: 16px; }
+.upload-btn {
+  display: inline-block;
+  font-size: 13px;
+  color: #6c5ce7;
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid #e0dcfa;
+  border-radius: 20px;
+}
+.upload-btn:hover { background: #f5f3ff; }
+
+.label { font-size: 13px; color: #888; margin: 0 0 10px; text-align: right; }
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.swatch {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.swatch.active { border-color: #333; }
+
+button#gen {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #fff;
+  background: #6c5ce7;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button#gen:hover { background: #5a4bd1; }
+
+#out { margin-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#out button {
+  background: #f0f0f3;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+#out button:hover { background: #e4e4e9; }
+
+.error { color: #c0392b; font-size: 13px; }
