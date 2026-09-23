@@ -82,10 +82,6 @@ Add, remove, or change hex values — `JScript.js` picks them up automatically v
 
 ## 📄 License
 
-MIT — feel free to use this file on your own projects!
-
-*(Swap this table for real screenshots once you have them)*
+feel free to use this file on your own projects!
 
 ---
-
-## 🗂️ Project structure
