@@ -32,6 +32,53 @@
 |:---:|:---:|:---:|
 | ⬛ | 🟦 | 🟩 |
 
+
+---
+
+## 🚀 Setup
+
+1. Requires PHP 7.4+ with a running web server (`php -S localhost:8000` works fine for local testing).
+2. Wire `getUserData()` in `index.php` to your real database query:
+
+```php
+function getUserData($userId) {
+    // Replace with a real PDO/mysqli query
+    return [
+        'username'    => 'exampleuser',
+        'profile_url' => 'https://yoursite.com/u/exampleuser',
+        'avatar_path' => 'uploads/default-avatar.png'
+    ];
+}
+```
+
+3. Visit `index.php?id=123` for any user ID.
+
+---
+
+## 🎨 Customizing colors
+
+Edit the swatch buttons in `index.php`:
+
+```html
+<button class="swatch" style="background:#2563eb" data-color="#2563eb"></button>
+```
+
+Add, remove, or change hex values — `JScript.js` picks them up automatically via `data-color`.
+
+---
+
+## 🧩 Tech notes
+
+- Error correction is locked to `H` — required so the center image doesn't break scannability.
+- Username is escaped server-side with `htmlspecialchars()` to prevent stored XSS.
+- `qr-code-styling` is loaded from `unpkg` — self-host it if you need offline/air-gapped support.
+
+---
+
+## 📄 License
+
+MIT — feel free to use this file on your own projects!
+
 *(Swap this table for real screenshots once you have them)*
 
 ---
