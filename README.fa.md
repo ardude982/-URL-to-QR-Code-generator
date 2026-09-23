@@ -35,7 +35,7 @@
   <img src="lightpurple.png" width="220">
      <img src="blue.png" width="220">
      <img src="red.png" width="220">
-     <img src="yellow.png" width="220">
+     <img src="yellow.png" width="240">
 </p>
 
 
