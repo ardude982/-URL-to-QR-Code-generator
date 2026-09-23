@@ -32,7 +32,7 @@
   <img src="assets/purple.png" width="220">
   <img src="assets/blue.png" width="220">
   <img src="assets/lightpurple.png" width="220">
-     <img src="assets/green.png" width="220">
+     <img src="blue.png" width="220">
      <img src="assets/red.png" width="220">
      <img src="assets/yellow.png" width="220">
 </p>
