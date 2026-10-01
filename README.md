@@ -29,12 +29,12 @@
 ## 📸 Preview
 
 <p align="center">
-  <img src="purple.png" width="220">
-  <img src="green.png" width="220">
-  <img src="lightpurple.png" width="220">
-     <img src="blue.png" width="220">
-     <img src="red.png" width="220">
-     <img src="yellow.png" width="220">
+  <img src="Preview-Photos/purple.png" width="220">
+  <img src="Preview-Photos/green.png" width="220">
+  <img src="Preview-Photos/lightpurple.png" width="220">
+     <img src="Preview-Photos/blue.png" width="220">
+     <img src="Preview-Photos/red.png" width="220">
+     <img src="Preview-Photos/yellow.png" width="220">
 </p>
 
 
@@ -82,10 +82,6 @@ Add, remove, or change hex values — `JScript.js` picks them up automatically v
 
 ## 📄 License
 
-MIT — feel free to use this file on your own projects!
-
-*(Swap this table for real screenshots once you have them)*
+feel free to use this file on your own projects!
 
 ---
-
-## 🗂️ Project structure
