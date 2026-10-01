@@ -1,520 +1,164 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // --- Configuration ---
+    const PROFILE_URL = "https://your-social-media.com/profile/username"; // Change this
+    const LOGO_URL = "logo.png"; // Ensure this file exists in the same folder
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    /*
- bara check url php
-    */
-
-    if (
-        typeof USER_PROFILE_URL === "undefined" ||
-        !USER_PROFILE_URL
-    ) {
-
-        console.error(
-            "USER_PROFILE_URL was not provided by PHP."
-        );
-
-        return;
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Current colors
-    |--------------------------------------------------------------------------
-    */
-
-    let currentGradient = [
-        "#6a5cff",
-        "#ff5ca8"
-    ];
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Create QR Code
-    |--------------------------------------------------------------------------
-    */
-
-    const qrContainer =
-        document.getElementById("qrCanvas");
-
-
-    if (!qrContainer) {
-
-        console.error(
-            "QR container #qrCanvas was not found."
-        );
-
-        return;
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Check QR library
-    |--------------------------------------------------------------------------
-    */
-
-    if (
-        typeof QRCodeStyling === "undefined"
-    ) {
-
-        console.error(
-            "QRCodeStyling library was not loaded."
-        );
-
-        return;
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | QR Code
-    |--------------------------------------------------------------------------
-    */
-
-    const qrCode = new QRCodeStyling({
-
-        width: 240,
-
-        height: 240,
-
-        type: "canvas",
-
-        data: USER_PROFILE_URL,
-
-        margin: 4,
-
-
-        /*
-        | Error correction
-        */
-
-        qrOptions: {
-
-            errorCorrectionLevel: "H"
-
+    // --- Translations ---
+    const translations = {
+        fa: {
+            title: "QR Code پروفایل",
+            label: "انتخاب رنگ",
+            downloadBtn: "دانلود QR Code",
+            langToggle: "EN",
+            swatches: ["بنفش و صورتی", "آبی", "بنفش و صورتی روشن", "سبز", "نارنجی و صورتی", "زرد و نارنجی"]
         },
-
-
-        /*
-        | QR dots
-        */
-
-        dotsOptions: {
-
-            type: "rounded",
-
-            gradient: {
-
-                type: "linear",
-
-                rotation: Math.PI / 4,
-
-                colorStops: [
-
-                    {
-                        offset: 0,
-                        color: currentGradient[0]
-                    },
-
-                    {
-                        offset: 1,
-                        color: currentGradient[1]
-                    }
-
-                ]
-
-            }
-
-        },
-
-
-        /*
-        | Corner squares
-        */
-
-        cornersSquareOptions: {
-
-            type: "extra-rounded",
-
-            color: currentGradient[0]
-
-        },
-
-
-        /*
-        | Corner dots
-        */
-
-        cornersDotOptions: {
-
-            type: "dot",
-
-            color: currentGradient[0]
-
-        },
-
-
-        /*
-        | Background
-        */
-
-        backgroundOptions: {
-
-            color: "#ffffff"
-
-        },
-
-
-        /*
-        | Logo
-        */
-
-        image: "logo.png",
-
-
-        imageOptions: {
-
-            crossOrigin: "anonymous",
-
-            margin: 6,
-
-            imageSize: 0.35
-
+        en: {
+            title: "Profile QR Code",
+            label: "Choose Color",
+            downloadBtn: "Download QR Code",
+            langToggle: "FA",
+            swatches: ["Purple & Pink", "Blue", "Light Purple & Pink", "Green", "Orange & Pink", "Yellow & Orange"]
         }
+    };
 
+    let currentLang = "fa";
+    let currentGradient = ["#6a5cff", "#ff5ca8"];
+
+    // --- Language Switcher Logic ---
+    const updateLanguage = (lang) => {
+        currentLang = lang;
+        const t = translations[lang];
+        
+        // Update HTML attributes
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+        
+        // Update text content
+        document.title = t.title;
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+            const key = el.getAttribute("data-i18n");
+            if (t[key]) el.textContent = t[key];
+        });
+
+        // Update aria-labels for swatches
+        document.querySelectorAll("[data-i18n-aria]").forEach((el, index) => {
+            if (t.swatches[index]) {
+                el.setAttribute("aria-label", t.swatches[index]);
+            }
+        });
+
+        // Update toggle button text
+        document.getElementById("langToggle").textContent = t.langToggle;
+    };
+
+    document.getElementById("langToggle").addEventListener("click", () => {
+        updateLanguage(currentLang === "fa" ? "en" : "fa");
     });
 
+    // Initialize language
+    updateLanguage("fa");
 
-    /*
-    |--------------------------------------------------------------------------
-    | Display QR
-    |--------------------------------------------------------------------------
-    */
+    // --- QR Code Logic ---
+    const qrContainer = document.getElementById("qrCanvas");
+    if (!qrContainer) return;
+
+    const qrCode = new QRCodeStyling({
+        width: 240,
+        height: 240,
+        type: "canvas",
+        data: PROFILE_URL,
+        margin: 4,
+        qrOptions: { errorCorrectionLevel: "H" },
+        dotsOptions: {
+            type: "rounded",
+            gradient: {
+                type: "linear",
+                rotation: Math.PI / 4,
+                colorStops: [
+                    { offset: 0, color: currentGradient[0] },
+                    { offset: 1, color: currentGradient[1] }
+                ]
+            }
+        },
+        cornersSquareOptions: { type: "extra-rounded", color: currentGradient[0] },
+        cornersDotOptions: { type: "dot", color: currentGradient[0] },
+        backgroundOptions: { color: "#ffffff" },
+        // Logo configuration (centered by default)
+        imageOptions: { crossOrigin: "anonymous", margin: 6, imageSize: 0.35 }
+    });
 
     qrCode.append(qrContainer);
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Recolor logo
-    |--------------------------------------------------------------------------
-    */
-
-    function recolorImage(
-        src,
-        hexColor,
-        callback
-    ) {
-
+    // Helper: Recolor logo to match the primary gradient color
+    const recolorLogo = (src, color, callback) => {
+        if (!src) return callback(null);
+        
         const img = new Image();
-
         img.crossOrigin = "anonymous";
-
-
-        img.onload = function () {
-
-            const canvas =
-                document.createElement("canvas");
-
-
+        
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
             canvas.width = img.width;
-
             canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return callback(null);
 
-
-            const ctx =
-                canvas.getContext("2d");
-
-
-            if (!ctx) {
-
-                console.error(
-                    "Could not create canvas context."
-                );
-
-                return;
-
-            }
-
-
-            /*
-            | Draw original logo
-            */
-
-            ctx.drawImage(
-                img,
-                0,
-                0
-            );
-
-
-            /*
-            | Keep the original transparency
-            | and apply selected color
-            */
-
-            ctx.globalCompositeOperation =
-                "source-in";
-
-
-            ctx.fillStyle = hexColor;
-
-
-            ctx.fillRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-
-            /*
-            | Return PNG
-            */
-
-            callback(
-                canvas.toDataURL("image/png")
-            );
-
+            ctx.drawImage(img, 0, 0);
+            ctx.globalCompositeOperation = "source-in";
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            callback(canvas.toDataURL("image/png"));
         };
-
-
-        img.onerror = function () {
-
-            console.warn(
-                "logo.png could not be loaded. QR will work without the logo."
-            );
-
+        
+        img.onerror = () => {
+            console.warn("Logo not found or blocked by CORS. Rendering QR without logo.");
+            callback(null); // Fails gracefully
         };
-
-
+        
         img.src = src;
+    };
 
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Color buttons
-    |--------------------------------------------------------------------------
-    */
-
-    const swatches =
-        document.querySelectorAll(".swatch");
-
-
-    swatches.forEach(function (button) {
-
-
-        button.addEventListener(
-            "click",
-            function () {
-
-
-                /*
-                | Remove active state
-                */
-
-                swatches.forEach(
-                    function (item) {
-
-                        item.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-
-                /*
-                | Activate clicked color
-                */
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                /*
-                | Get colors
-                */
-
-                currentGradient = [
-
-                    button.dataset.g1,
-
-                    button.dataset.g2
-
-                ];
-
-
-                /*
-                | Update QR
-                */
-
-                qrCode.update({
-
-                    dotsOptions: {
-
-                        type: "rounded",
-
-                        gradient: {
-
-                            type: "linear",
-
-                            rotation: Math.PI / 4,
-
-                            colorStops: [
-
-                                {
-                                    offset: 0,
-                                    color: currentGradient[0]
-                                },
-
-                                {
-                                    offset: 1,
-                                    color: currentGradient[1]
-                                }
-
-                            ]
-
-                        }
-
-                    },
-
-
-                    cornersSquareOptions: {
-
-                        type: "extra-rounded",
-
-                        color:
-                            currentGradient[0]
-
-                    },
-
-
-                    cornersDotOptions: {
-
-                        type: "dot",
-
-                        color:
-                            currentGradient[0]
-
-                    }
-
-                });
-
-
-                /*
-                | Recolor logo
-                */
-
-                recolorImage(
-
-                    "logo.png",
-
-                    currentGradient[0],
-
-                    function (tintedLogo) {
-
-                        qrCode.update({
-
-                            image: tintedLogo
-
-                        });
-
-                    }
-
-                );
-
-            }
-        );
-
+    // Apply initial logo color
+    recolorLogo(LOGO_URL, currentGradient[0], (tintedLogo) => {
+        if (tintedLogo) qrCode.update({ image: tintedLogo });
     });
 
+    // Color swatches logic
+    document.querySelectorAll(".swatch").forEach(button => {
+        button.addEventListener("click", () => {
+            document.querySelectorAll(".swatch").forEach(b => b.classList.remove("active"));
+            button.classList.add("active");
 
-    /*
-    |--------------------------------------------------------------------------
-    | Initial logo color
-    |--------------------------------------------------------------------------
-    */
-
-    recolorImage(
-
-        "logo.png",
-
-        currentGradient[0],
-
-        function (tintedLogo) {
+            currentGradient = [button.dataset.g1, button.dataset.g2];
 
             qrCode.update({
-
-                image: tintedLogo
-
+                dotsOptions: {
+                    type: "rounded",
+                    gradient: {
+                        type: "linear",
+                        rotation: Math.PI / 4,
+                        colorStops: [
+                            { offset: 0, color: currentGradient[0] },
+                            { offset: 1, color: currentGradient[1] }
+                        ]
+                    }
+                },
+                cornersSquareOptions: { type: "extra-rounded", color: currentGradient[0] },
+                cornersDotOptions: { type: "dot", color: currentGradient[0] }
             });
 
-        }
+            // Recolor logo on color change
+            recolorLogo(LOGO_URL, currentGradient[0], (tintedLogo) => {
+                if (tintedLogo) qrCode.update({ image: tintedLogo });
+            });
+        });
+    });
 
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Download button
-    |--------------------------------------------------------------------------
-    */
-
-    const output =
-        document.getElementById("out");
-
-
-    if (!output) {
-
-        console.error(
-            "#out was not found."
-        );
-
-        return;
-
+    // Download button logic
+    const downloadBtn = document.getElementById("downloadBtn");
+    if (downloadBtn) {
+        downloadBtn.addEventListener("click", () => {
+            qrCode.download({ name: "my-profile-qrcode", extension: "png" });
+        });
     }
-
-
-    const downloadButton =
-        document.createElement("button");
-
-
-    downloadButton.type =
-        "button";
-
-
-    downloadButton.textContent =
-        "دانلود QR Code";
-
-
-    downloadButton.addEventListener(
-        "click",
-        function () {
-
-            qrCode.download({
-
-                name:
-                    "my-profile-qrcode",
-
-                extension:
-                    "png"
-
-            });
-
-        }
-    );
-
-
-    output.appendChild(
-        downloadButton
-    );
-
 });
-
