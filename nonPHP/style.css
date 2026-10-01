@@ -22,7 +22,7 @@ body {
 }
 
 .card {
-    position: relative; /* For absolute positioning of lang toggle */
+    position: relative;
     width: 100%;
     max-width: 380px;
     padding: 28px 24px;
@@ -31,36 +31,6 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     text-align: center;
     overflow: hidden;
-}
-
-/* Language Toggle Button */
-.lang-toggle {
-    position: absolute;
-    top: 16px;
-    left: 16px; /* Left side in RTL */
-    background: #f0f0f3;
-    border: none;
-    border-radius: 8px;
-    padding: 6px 14px;
-    font-family: "Vazirmatn", sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 10;
-}
-
-.lang-toggle:hover {
-    background: #e4e4e9;
-    color: #333;
-    transform: translateY(-1px);
-}
-
-/* Adjust toggle position for LTR (English) */
-html[dir="ltr"] .lang-toggle {
-    left: auto;
-    right: 16px;
 }
 
 #qrWrap {
@@ -104,10 +74,6 @@ html[dir="ltr"] .lang-toggle {
     color: #888888;
     font-size: 13px;
     text-align: right;
-}
-
-html[dir="ltr"] .label {
-    text-align: left;
 }
 
 .swatches {
@@ -179,7 +145,6 @@ html[dir="ltr"] .label {
     outline-offset: 3px;
 }
 
-/* Responsive Design */
 @media (max-width: 420px) {
     body { padding: 12px; }
     .card { padding: 22px 16px; border-radius: 14px; }
