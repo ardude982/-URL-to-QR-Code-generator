@@ -34,7 +34,7 @@
   <img src="Preview-Photos/lightpurple.png" width="220">
      <img src="Preview-Photos/blue.png" width="220">
      <img src="Preview-Photos/red.png" width="220">
-     <img src="Preview-Photos/yellow.png" width="220">
+     <img src="Preview-Photos/yellow.png" width="220" height="200">
 </p>
 
 
